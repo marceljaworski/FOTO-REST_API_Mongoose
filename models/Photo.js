@@ -1,33 +1,45 @@
 import mongoose from "mongoose";
 
-
-const schema = new mongoose.Schema({
-    Price: {
+const schemaPhoto = new mongoose.Schema({
+    price: {
         type: Number, 
     },
-    Date: {
+    date: {
         type: Date, 
     },
-    Url: {
+    url: {
         type: String,
+        unique: true,
         required: true,
-        unique: true, 
     },
-    Theme: {
+    theme: {
         type: String, 
     },
-})
-const Photo = mongoose.model("Photo", schema);
+});
+const Photo = mongoose.model("Photo", schemaPhoto);
 
+export const getAll = async () => {
+    const photos = await Photo.find();
+    return photos;
+};
 export const create = async (document) => {
     const newPhoto = new Photo(document);
     const result = await newPhoto.save();
     return result;
 };
-export const getAll = async () => {
-    const photos = await Photo.find();
-    return photos;
+export const getOne = async (photoId) => {
+    const photo = await Photo.findById(photoId);
+    return photo;
 };
-// export const getOne = async () => {};
-// export const editOne = async () => {};
-// export const deleteOne = async () => {};
+export const replace = async (photoId, data) => {
+    const photo = await Photo.findByIdAndUpdate(photoId, data, {new: true})
+
+    return photo
+}
+
+export const deleteOne = async (photoId) => {
+    const photo = await Photo.findByIdAndDelete(photoId)
+
+    return photo
+}
+
