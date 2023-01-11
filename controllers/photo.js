@@ -1,4 +1,5 @@
 import * as Photo from "../models/Photo.js";
+import { faker } from '@faker-js/faker';
 
 export const getAll = async (req, res) => {
     const result = await Photo.getAll();
@@ -42,6 +43,18 @@ export const deleteOne = async (req, res) => {
     }
 
     res.status(204).send("deleted")
+}
+export const createFake = async (req, res) => {
+    
+    const data = {
+        price: faker.commerce.price(),
+        url: faker.image.imageUrl(1234, 2345, undefined, true),
+        date: faker.date.past(),
+        theme: faker.word.noun(),
+    }
+    
+    const result = await Photo.create(data)
+    res.status(201).json(result)
 }
 
 
