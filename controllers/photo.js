@@ -4,9 +4,7 @@ export const getAll = async (req, res) => {
     const result = await Photo.getAll();
     res.status(200).json(result);
 };
-// export const get = async (req, res) => {
-//     res.status(200).send()
-// };
+
 export const create = async (req, res) => {
     try {
         const result = await Photo.create(req.body);
@@ -16,16 +14,17 @@ export const create = async (req, res) => {
     }
   
 };
-export const getOne = async (photoId) => {
-     //const photo = await Photo.findOne({_id: photoId})
-
-    const photo = await Photo.findById(photoId)
-
-    return photo
+export const getOne = async (req, res) => {
+    const result = await Photo.getOne(req.params.photoId)
+    if (!result) {
+        res.status(404).send("not found")
+        return
+    } 
+    res.status(200).json(result)
 }
 export const replace = async (req, res) => {
-    const result = await Photo.editOne(req.params.photoId, req.body)
-    
+    const result = await Photo.replace(req.params.photoId, req.body)
+    console.log(result)
     if (!result) {
         res.status(404).send("not found")
         return

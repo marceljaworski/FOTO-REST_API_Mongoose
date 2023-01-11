@@ -7,6 +7,6 @@ router.post("/", photos.create);
 router.get("/", photos.getAll);
 router.get("/:photoId", photos.getOne)
 router.put("/:photoId", photos.replace)
-router.delete("/:deleteId", photos.deleteOne)
+router.delete("/:photoId", photos.deleteOne)
 
 export default router;
