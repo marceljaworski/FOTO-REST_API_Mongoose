@@ -27,7 +27,7 @@ export const replace = async (req, res) => {
     const result = await Photo.editOne(req.params.photoId, req.body)
     
     if (!result) {
-        res.status(404).send("nicht da digga")
+        res.status(404).send("not found")
         return
     } 
     
@@ -38,11 +38,11 @@ export const deleteOne = async (req, res) => {
     const result = await Photo.deleteOne(req.params.photoId)
     console.log(result)
     if (!result) {
-        res.status(404).send("nicht da digga")
+        res.status(404).send("not found")
         return
     }
 
-    res.status(204).send("Erfolgreich gelöscht")
+    res.status(204).send("deleted")
 }
 
 
