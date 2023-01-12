@@ -33,6 +33,17 @@ export const replace = async (req, res) => {
     
     res.status(201).json(result)
 }
+export const update = async (req, res) => {
+    const result = await Photo.update(req.params.photoId, req.body)
+    console.log(result)
+    if (!result) {
+        res.status(404).send("not found")
+        return
+    } 
+    
+    res.status(201).json(result)
+}
+
 
 export const deleteOne = async (req, res) => {
     const result = await Photo.deleteOne(req.params.photoId)

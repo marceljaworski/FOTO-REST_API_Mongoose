@@ -7,6 +7,7 @@ router.post("/", photos.create);
 router.get("/", photos.getAll);
 router.get("/:photoId", photos.getOne)
 router.put("/:photoId", photos.replace)
+router.patch("/:photoId", photos.update)
 router.delete("/:photoId", photos.deleteOne)
 router.post("/newFake", photos.createFake)
 

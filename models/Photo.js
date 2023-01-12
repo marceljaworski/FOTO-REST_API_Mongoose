@@ -32,10 +32,16 @@ export const getOne = async (photoId) => {
     return photo;
 };
 export const replace = async (photoId, data) => {
+    const photo = await Photo.findOneAndReplace({_id: photoId}, data, {returnDocument: "after"})
+
+    return photo
+}
+export const update = async (photoId, data) => {
     const photo = await Photo.findByIdAndUpdate(photoId, data, {new: true})
 
     return photo
 }
+
 
 export const deleteOne = async (photoId) => {
     const photo = await Photo.findByIdAndDelete(photoId)
