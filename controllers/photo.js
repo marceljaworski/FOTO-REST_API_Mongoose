@@ -2,16 +2,18 @@ import * as Photo from "../models/Photo.js";
 import { faker } from '@faker-js/faker';
 
 export const getAll = async (req, res) => {
+    
     const result = await Photo.getAll();
     res.status(200).json(result);
 };
 
-export const create = async (req, res) => {
+export const create = async (req, res, next) => {
     try {
         const result = await Photo.create(req.body);
         res.status(201).json(result);
     }catch(error){
-        res.status(400).json(error.message)
+        next(error)
+        // res.status(400).json(error.message)
     }
   
 };
