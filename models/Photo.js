@@ -2,24 +2,30 @@ import mongoose from "mongoose";
 const equipmentSchema = new mongoose.Schema({
     cameraModel: {
         type: String,
+        default: "canon60D",
+        required: true
     },
     focalLength: {
         type: String, 
+        default: "18mm",
+        required: true
     },
     exposure: {
-        type: String,  
+        type: String,
+        default: "1/120"
     },
     aperture: {
         type: Number,
         min: 1.4,
-        max: 32 
+        max: 32,
+        default:5.6
     },
     iso: {
         type: Number,
         min: 100,
-        max: 6400  
+        max: 6400
     },
-    white_balance: {
+    whiteBalance: {
         type: Number,
         min: 2500,
         max: 10000
@@ -48,7 +54,10 @@ const schemaPhoto = new mongoose.Schema({
     theme: {
         type: String, 
     },
-    equipment: [equipmentSchema]
+    equipment: {
+        type: equipmentSchema,
+    },
+    equipments: [equipmentSchema]
 },{
     versionKey: false,
     // _id: false,
