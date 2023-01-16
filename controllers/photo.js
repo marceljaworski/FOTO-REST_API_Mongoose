@@ -1,5 +1,5 @@
 import * as Photo from "../models/Photo.js";
-import { faker } from '@faker-js/faker';
+
 
 const errorSwitch = (err) => {
     switch(err.path) {
@@ -70,18 +70,6 @@ export const deleteOne = async (req, res, next) => {
         next(errorSwitch(err));
     };
     console.log(result)
-}
-export const createFake = async (req, res) => {
-  
-    const data = {
-        price: faker.commerce.price(),
-        url: faker.image.imageUrl(1234, 2345, undefined, true),
-        date: faker.date.past(),
-        theme: faker.word.noun(),
-    };
-    const result = await Photo.create(data);
-    res.status(201).json(result);
-    
 }
 
 

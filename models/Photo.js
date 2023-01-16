@@ -54,4 +54,5 @@ export const deleteOne = async (photoId) => {
 
     return photo;
 };
+export default Photo;
 
