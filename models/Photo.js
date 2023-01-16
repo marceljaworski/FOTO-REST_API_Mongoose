@@ -1,5 +1,31 @@
 import mongoose from "mongoose";
-
+const equipmentSchema = new mongoose.Schema({
+    cameraModel: {
+        type: String,
+    },
+    focalLength: {
+        type: String, 
+    },
+    exposure: {
+        type: String,  
+    },
+    aperture: {
+        type: Number,
+        min: 1.4,
+        max: 32 
+    },
+    iso: {
+        type: Number,
+        min: 100,
+        max: 6400  
+    },
+    white_balance: {
+        type: Number,
+        min: 2500,
+        max: 10000
+           
+    },
+},{_id: false, versionKey: false});
 const schemaPhoto = new mongoose.Schema({
     price: {
         type: Number, 
@@ -22,6 +48,10 @@ const schemaPhoto = new mongoose.Schema({
     theme: {
         type: String, 
     },
+    equipment: [equipmentSchema]
+},{
+    versionKey: false,
+    // _id: false,
 });
 const Photo = mongoose.model("Photo", schemaPhoto);
 
