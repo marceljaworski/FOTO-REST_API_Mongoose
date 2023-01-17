@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const equipmentSchema = new mongoose.Schema({
+const settingSchema = new mongoose.Schema({
     cameraModel: {
         type: String,
         default: "canon60D",
@@ -56,10 +56,10 @@ const schemaPhoto = new mongoose.Schema({
     theme: {
         type: String, 
     },
-    equipment: {
-        type: equipmentSchema,
+    setting: {
+        type: settingSchema,
     },
-    equipments: [equipmentSchema]
+    settings: settingSchema
 },{
     versionKey: false,
     // _id: false,
