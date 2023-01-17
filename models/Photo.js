@@ -7,8 +7,9 @@ const equipmentSchema = new mongoose.Schema({
     },
     focalLength: {
         type: String, 
-        default: "18mm",
-        required: true
+        default: Number,
+        min:8,
+        max:1200
     },
     exposure: {
         type: String,
@@ -16,20 +17,21 @@ const equipmentSchema = new mongoose.Schema({
     },
     aperture: {
         type: Number,
+        default: 5.6,
         min: 1.4,
-        max: 32,
-        default:5.6
+        max: 32
     },
     iso: {
         type: Number,
+        default: 160,
         min: 100,
         max: 6400
     },
     whiteBalance: {
         type: Number,
+        default: 5200,
         min: 2500,
-        max: 10000
-           
+        max: 10000    
     },
 },{_id: false, versionKey: false});
 const schemaPhoto = new mongoose.Schema({

@@ -14,12 +14,20 @@ const deleteAll = async () => {
     console.log("deleting all photos")
     return await Photo.deleteMany();
 }
+
 const createPhoto = async () => {
     const photo = new Photo({
         price: faker.commerce.price(),
         date: faker.date.past(),
         url: faker.image.imageUrl(1234, 2345, undefined, true),
         theme: faker.word.noun(),
+        equipments: [ {
+            cameraModel: faker.vehicle.model(), 
+            focalLength: faker.finance.amount(8, 1200, 0),
+            aperture: faker.finance.amount(1.4, 32, 1),
+            iso: faker.finance.amount(100, 6400, 0),
+            whiteBalance: faker.finance.amount(2500, 10000, 0),
+        }]
     });
     await photo.save();
 }
