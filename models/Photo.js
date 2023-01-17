@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
+import Album from "./Album.js"
 const settingSchema = new mongoose.Schema({
     cameraModel: {
         type: String,
         default: "canon60D",
-        required: true
+        // required: true
     },
     focalLength: {
         type: String, 
@@ -50,8 +51,8 @@ const schemaPhoto = new mongoose.Schema({
             },
             message: "Please write a valid URL"
         },
-        unique: true,
-        required: true,
+        // unique: true,
+        // required: true,
     },
     theme: {
         type: String, 
@@ -59,7 +60,12 @@ const schemaPhoto = new mongoose.Schema({
     setting: {
         type: settingSchema,
     },
-    settings: settingSchema
+    settings: settingSchema,
+    album: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Album",
+        // required: true,
+    }
 },{
     versionKey: false,
     // _id: false,
@@ -67,7 +73,7 @@ const schemaPhoto = new mongoose.Schema({
 const Photo = mongoose.model("Photo", schemaPhoto);
 
 export const getAll = async () => {
-    const photos = await Photo.find();
+    const photos = await Photo.find().populate("album");
     return photos;
 };
 export const create = async (document) => {    

@@ -7,14 +7,28 @@ x - Die Collection soll vor dem Befüllen geleert werden
 x - Über einen weiteren Parameter soll das Leeren verhindert werden können */
 import { faker } from '@faker-js/faker';
 import Photo from "./models/Photo.js";
+import Album from "./models/Album.js";
 import "./lib/mongoose.js";
 import { argv } from 'process';
 
-const deleteAll = async () => {
+const deletePhotos = async () => {
     console.log("deleting all photos")
     return await Photo.deleteMany();
+};
+const deleteAlbums = async () => {
+    console.log("deleting all albums")
+    return await Album.deleteMany();
 }
-
+const albums = [];
+const createAlbum = async () => {
+    const album = new Album({
+        title: faker.word.noun(),
+    });
+    const result = await album.save();
+    albums.push(result._id);
+    console.log(result._id)
+    
+}
 const createPhoto = async () => {
     const photo = new Photo({
         price: faker.commerce.price(),
@@ -27,26 +41,36 @@ const createPhoto = async () => {
             aperture: faker.finance.amount(1.4, 32, 1),
             iso: faker.finance.amount(100, 6400, 0),
             whiteBalance: faker.finance.amount(2500, 10000, 0),
-        }
+        },
+        album: albums[0],
     });
     await photo.save();
 }
-
+console.log({albums});
 const createPhotos = async (count = 20) => {
     for (let i = 0; i < count; i++) {
         console.log(`creating photo:`, i + 1);
         await createPhoto();
     }
 };
+const createAlbums = async (count = 20) => {
+    for (let i = 0; i < count/4; i++) {
+        console.log(`creating album:`, i + 1);
+        await createAlbum();
+    }
+};
 console.log(argv)
 try {
     if (!argv.includes("doNotDelete")) {
-        console.log("deleting all photos...");
-        await deleteAll();
+        console.log("deleting all records...");
+        await deletePhotos();
+        await deleteAlbums();
         console.log("done.");
     }
+    console.log("creating new records...");
     const count = argv[2] === "doNotDelete" ? undefined : argv[2];
     await createPhotos(count);
+    await createAlbums(count);
     console.log("done.");
     console.log("seeding finished. happy coding!");
     process.exit(0);

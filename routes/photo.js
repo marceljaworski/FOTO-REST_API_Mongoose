@@ -1,13 +1,13 @@
 import { Router } from "express";
 import * as photos from "../controllers/photo.js"
 
-const router = Router();
+const photoRoutes = Router();
 
-router.post("/", photos.create);
-router.get("/", photos.getAll);
-router.get("/:photoId", photos.getOne)
-router.put("/:photoId", photos.replace)
-router.patch("/:photoId", photos.update)
-router.delete("/:photoId", photos.deleteOne)
+photoRoutes.post("/", photos.create);
+photoRoutes.get("/", photos.getAll);
+photoRoutes.get("/:photoId", photos.getOne)
+photoRoutes.put("/:photoId", photos.replace)
+photoRoutes.patch("/:photoId", photos.update)
+photoRoutes.delete("/:photoId", photos.deleteOne)
 
-export default router;
+export default photoRoutes;
