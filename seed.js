@@ -26,8 +26,6 @@ const createAlbum = async () => {
     });
     const result = await album.save();
     albums.push(result._id);
-    console.log(result._id)
-    
 }
 const createPhoto = async () => {
     const photo = new Photo({
@@ -46,7 +44,6 @@ const createPhoto = async () => {
     });
     await photo.save();
 }
-console.log({albums});
 const createPhotos = async (count = 20) => {
     for (let i = 0; i < count; i++) {
         console.log(`creating photo:`, i + 1);
@@ -69,8 +66,8 @@ try {
     }
     console.log("creating new records...");
     const count = argv[2] === "doNotDelete" ? undefined : argv[2];
-    await createPhotos(count);
     await createAlbums(count);
+    await createPhotos(count);
     console.log("done.");
     console.log("seeding finished. happy coding!");
     process.exit(0);
