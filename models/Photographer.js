@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 
-const schema = mongoose.Schema({
+const photographerSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -27,41 +27,39 @@ const schema = mongoose.Schema({
         // country: {
         //     type: String,
         //     enum: ["Deutschland", "Moldawien", "Iran", "Syrien", "Venezuela"]
-        // }
+        // }Album
     },
 })
-const Album = mongoose.model("Album", schema);
+const Photographer = mongoose.model("Photographer", photographerSchema);
 
 export const getAll = async () => {
-    const albums = await Album.find();
-    return albums;
+    const photographers = await Album.find();
+    return photographers;
 };
 export const create = async (document) => {    
-    const newAlbum = new Album(document);
-    const result = await newAlbum.save();
+    const newPhotographer = new Photographer(document);
+    const result = await newPhotographer.save();
     return result;
     
 };
-export const getOne = async (albumId) => {
-    const album = await Album.findById(albumId);
-    return album;
+export const getOne = async (photographerId) => {
+    const photographer = await Photographer.findById(photographerId);
+    return photographer;
 };
-export const replace = async (albumId, data) => {
-    const album = await Album.findOneAndReplace({_id: albumId}, data, {returnDocument: "after", runValidators: true},);
+export const replace = async (photographerId, data) => {
+    const photographer = await Photographer.findOneAndReplace({_id: photographerId}, data, {returnDocument: "after", runValidators: true},);
 
-    return album;
+    return photographer;
 };
-export const update = async (albumId, data) => {
-    const album = await Album.findByIdAndUpdate(albumId, data, {new: true, runValidators: true});
+export const update = async (photographerId, data) => {
+    const photographer = await Photographer.findByIdAndUpdate(photographerId, data, {new: true, runValidators: true});
 
-    return album;
+    return photographer;
 };
-export const deleteOne = async (albumId) => {
-    const album = await Album.findByIdAndDelete(albumId)
+export const deleteOne = async (photographerId) => {
+    const photographer = await Photographer.findByIdAndDelete(photographerId)
 
-    return album;
+    return photographer;
 };
-
-const Photographer = mongoose.model("Photographer", schema)
 
 export default Photographer
