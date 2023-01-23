@@ -57,15 +57,15 @@ const schemaPhoto = new mongoose.Schema({
     theme: {
         type: String, 
     },
-    setting: {
-        type: settingSchema,
-    },
-    settings: settingSchema,
-    album: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Album",
-        required: true,
-    }
+    // setting: {
+    //     type: settingSchema,
+    // },
+    // settings: settingSchema,
+    // album: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Album",
+    //     required: true,
+    // }
 },{
     versionKey: false,
     // _id: false,
@@ -73,7 +73,8 @@ const schemaPhoto = new mongoose.Schema({
 const Photo = mongoose.model("Photo", schemaPhoto);
 
 export const getAll = async () => {
-    const photos = await Photo.find().populate("album");
+    const photos = await Photo.find()
+    // .populate("album");
     return photos;
 };
 export const create = async (document) => {    

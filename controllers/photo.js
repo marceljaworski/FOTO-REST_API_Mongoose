@@ -1,18 +1,18 @@
 import * as Photo from "../models/Photo.js";
 
 
-const errorSwitch = (err) => {
-    switch(err.path) {
-        case "_id":
-            err.statusCode = 404;
-            err.message = "ID not found"
-            break
-        default:
-            err.statusCode = 400;
-            err.message = "Check your input";
-    }
-    return err;
-}
+// const errorSwitch = (err) => {
+//     switch(err.path) {
+//         case "_id":
+//             err.statusCode = 404;
+//             err.message = "ID not found"
+//             break
+//         default:
+//             err.statusCode = 400;
+//             err.message = "Check your input";
+//     }
+//     return err;
+// }
 
 
 export const getAll = async (req, res, next) => {
@@ -20,7 +20,7 @@ export const getAll = async (req, res, next) => {
         const result = await Photo.getAll();
         res.status(200).json(result);
     } catch (err) {
-        next(errorSwitch(err));
+        next(err);
     };
 };
 
@@ -29,7 +29,7 @@ export const create = async (req, res, next) => {
         const result = await Photo.create(req.body);
         res.status(201).json(result);
     } catch(err) {
-        next(errorSwitch(err));
+        next(err);
         // res.status(400).json(error.message)
     }
   
