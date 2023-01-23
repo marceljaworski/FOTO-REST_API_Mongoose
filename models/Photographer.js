@@ -12,7 +12,7 @@ const photographerSchema = mongoose.Schema({
             message: "Please enter a valid email address"
         }
     },
-    password: String,
+    // password: String,
     address:{
         street: String,
         houseNumber: {
@@ -24,16 +24,15 @@ const photographerSchema = mongoose.Schema({
         },
         zipCode: String,
         city: String,
-        // country: {
-        //     type: String,
-        //     enum: ["Deutschland", "Moldawien", "Iran", "Syrien", "Venezuela"]
-        // }Album
+        country: String,
+            
     },
-})
+    
+},{versionKey: false})
 const Photographer = mongoose.model("Photographer", photographerSchema);
 
 export const getAll = async () => {
-    const photographers = await Album.find();
+    const photographers = await Photographer.find();
     return photographers;
 };
 export const create = async (document) => {    

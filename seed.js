@@ -8,6 +8,7 @@ x - Über einen weiteren Parameter soll das Leeren verhindert werden können */
 import { faker } from '@faker-js/faker';
 import Photo from "./models/Photo.js";
 import Album from "./models/Album.js";
+import Photographer from "./models/Photographer.js"
 import "./lib/mongoose.js";
 import { argv } from 'process';
 
@@ -19,6 +20,11 @@ const deleteAlbums = async () => {
     console.log("deleting all albums")
     return await Album.deleteMany();
 }
+
+const deletePhotographers = async () => {
+    console.log("deleting all photographers")
+    return await Photographer.deleteMany();
+};
 const albums = [];
 const createAlbum = async () => {
     const album = new Album({
@@ -26,6 +32,20 @@ const createAlbum = async () => {
     });
     const result = await album.save();
     albums.push(result._id);
+}
+const createPhotographer = async () => {
+    const photographer = new Photographer({
+        name: faker.name.fullName({}),
+        email: faker.internet.email(),
+        address:{
+            street: faker.address.street(),
+            houseNumber: faker.address.buildingNumber(),
+            zipCode: faker.address.zipCode(),
+            city: faker.address.city(),
+            country: faker.address.country()
+        },
+    });
+    await photographer.save();
 }
 const createPhoto = async () => {
     const photo = new Photo({
@@ -56,18 +76,26 @@ const createAlbums = async (count = 20) => {
         await createAlbum();
     }
 };
+const createPhotographers = async (count = 20) => {
+    for (let i = 0; i < count; i++) {
+        console.log(`creating photographer:`, i + 1);
+        await createPhotographer();
+    }
+};
 console.log(argv)
 try {
     if (!argv.includes("doNotDelete")) {
         console.log("deleting all records...");
-        await deletePhotos();
-        await deleteAlbums();
+        // await deletePhotos();
+        // await deleteAlbums();
+        await deletePhotographers()
         console.log("done.");
     }
     console.log("creating new records...");
     const count = argv[2] === "doNotDelete" ? undefined : argv[2];
-    await createAlbums(count);
-    await createPhotos(count);
+    // await createAlbums(count);
+    // await createPhotos(count);
+    await createPhotographers(count);
     console.log("done.");
     console.log("seeding finished. happy coding!");
     process.exit(0);

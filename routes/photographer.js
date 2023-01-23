@@ -6,9 +6,9 @@ const photographerRoutes = Router();
 
 photographerRoutes.post("/", photographer.create);
 photographerRoutes.get("/", photographer.getAll);
-photographerRoutes.get("/:photoId", photographer.getOne);
-photographerRoutes.put("/:photoId", photographer.replace);
-photographerRoutes.patch("/:photoId", photographer.update);
-photographerRoutes.delete("/:photoId", photographer.deleteOne);
+photographerRoutes.get("/:photographerId", photographer.getOne);
+photographerRoutes.put("/:photographerId", photographer.replace);
+photographerRoutes.patch("/:photographerId", photographer.update);
+photographerRoutes.delete("/:photographerId", photographer.deleteOne);
 
 export default photographerRoutes;
