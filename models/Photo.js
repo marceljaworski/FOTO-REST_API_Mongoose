@@ -57,15 +57,15 @@ const schemaPhoto = new mongoose.Schema({
     theme: {
         type: String, 
     },
-    // setting: {
-    //     type: settingSchema,
-    // },
-    // settings: settingSchema,
-    // album: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Album",
-    //     required: true,
-    // }
+    setting: {
+        type: settingSchema,
+    },
+    settings: settingSchema,
+    album: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Album",
+        required: true,
+    }
 },{
     versionKey: false,
     // _id: false,

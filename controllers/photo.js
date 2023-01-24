@@ -15,22 +15,21 @@ import * as Photo from "../models/Photo.js";
 // }
 
 
-export const getAll = async (req, res, next) => {
+export const getAll = async (req, res) => {
     try {
         const result = await Photo.getAll();
         res.status(200).json(result);
-    } catch (err) {
-        next(err);
+    } catch (error) {
+        res.status(400).json(error.message);
     };
 };
 
-export const create = async (req, res, next) => {
+export const create = async (req, res ) => {
     try {
         const result = await Photo.create(req.body);
         res.status(201).json(result);
-    } catch(err) {
-        next(err);
-        // res.status(400).json(error.message)
+    } catch(error) {
+        res.status(400).json(error.message);
     }
   
 };

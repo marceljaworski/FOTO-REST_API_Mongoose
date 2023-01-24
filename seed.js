@@ -8,7 +8,7 @@ x - Über einen weiteren Parameter soll das Leeren verhindert werden können */
 import { faker } from '@faker-js/faker';
 import Photo from "./models/Photo.js";
 import Album from "./models/Album.js";
-import Photographer from "./models/Photographer.js"
+import Photographer from "./models/Photographer.js";
 import "./lib/mongoose.js";
 import { argv } from 'process';
 
@@ -86,15 +86,15 @@ console.log(argv)
 try {
     if (!argv.includes("doNotDelete")) {
         console.log("deleting all records...");
-        // await deletePhotos();
-        // await deleteAlbums();
+        await deletePhotos();
+        await deleteAlbums();
         await deletePhotographers()
         console.log("done.");
     }
     console.log("creating new records...");
     const count = argv[2] === "doNotDelete" ? undefined : argv[2];
-    // await createAlbums(count);
-    // await createPhotos(count);
+    await createAlbums(count);
+    await createPhotos(count);
     await createPhotographers(count);
     console.log("done.");
     console.log("seeding finished. happy coding!");

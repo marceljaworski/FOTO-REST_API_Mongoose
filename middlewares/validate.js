@@ -3,6 +3,11 @@ import Ajv from "ajv";
 
 const ajv = new Ajv({ allErrors: true });//wir deklarieren eine neue Instanz von Ajv
 
+// Wir können verschiedene Formate über ein Zusatzmodul prüfen.
+// So ist es bspw. möglich, eine E-Mail-Adresse oder URL zu validieren.
+import addFormats from "ajv-formats";
+addFormats(ajv);
+
 const validate = (schema) => {
     /*Ajv kompiliert Schemas zu Funktionen und fängt sie in allen Fällen ab (unter Verwendung des Schemas selbst als Schlüssel in einer Map), sodass das nächste Mal, wenn dasselbe Schemaobjekt verwendet wird, es nicht erneut kompiliert wird*/ 
     const test = ajv.compile(schema);

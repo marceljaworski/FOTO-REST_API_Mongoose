@@ -1,13 +1,31 @@
 export const postSchema = {
     type: "object",
+    required: ["url"],
+    additionalProperties: true,
     properties: {
         price: { type: "number" },
-        date: { type: "string" },
+        date: { type: "string", format: "date" },
         url: { type: "string" },
         theme: { type: "string" },
+        settings: {
+            type: "object",
+            additionalProperties: true,
+            properties: {
+                cameraModel: { type: "string" },
+                focalLength: { type: "string" },
+                exposure: { type: "string" },
+                aperture: { type: "number" },
+                iso: { type: "number" },
+                whiteBalance: { type: "number" },
+            },
+        },
+        album: {
+            type: "string",
+            minLength: 24,
+            maxLength: 24,
+        }
     },
-    additionalProperties: true,
-}
+};
 export const getSchema = {
     type: "object",
     additionalProperties: true,
