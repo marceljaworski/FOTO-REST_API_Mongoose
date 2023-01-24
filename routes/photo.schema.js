@@ -1,7 +1,7 @@
 export const postSchema = {
     type: "object",
     required: ["url"],
-    additionalProperties: true,
+    additionalProperties: false,
     properties: {
         price: { type: "number" },
         date: { type: "string", format: "date" },
@@ -9,7 +9,7 @@ export const postSchema = {
         theme: { type: "string" },
         settings: {
             type: "object",
-            additionalProperties: true,
+            additionalProperties: false,
             properties: {
                 cameraModel: { type: "string" },
                 focalLength: { type: "string" },
