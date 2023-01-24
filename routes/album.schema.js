@@ -1,7 +1,7 @@
 export const postSchema = {
     type: "object",
     required: ["title"],
-    additionalProperties: true,
+    additionalProperties: false,
     properties: {
         title: {
             type: "string",
@@ -11,14 +11,14 @@ export const postSchema = {
 };
 export const getSchema = {
     type: "object",
-    additionalProperties: true,
+    additionalProperties: false,
 };
 export const getAllSchema = {
     type: "object",
-    additionalProperties: true,
+    additionalProperties: false,
 };
 
 export const deleteSchema = {
     type: "object",
-    additionalProperties: true,
+    additionalProperties: false,
 };

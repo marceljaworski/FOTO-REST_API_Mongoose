@@ -23,7 +23,6 @@ app.use("/albums",  albumRoutes);
 app.use("/photographer",  photographerRoutes);
 
 app.use((error, req, res, next) => {
-    console.log(error);
-    const statusCode = error.statusCode || 500;
-    res.status(statusCode).send(error.message);
+    console.error(error);
+    res.status(500).end();
 });

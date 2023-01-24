@@ -23,19 +23,19 @@ export const postSchema = {
             type: "string",
             minLength: 24,
             maxLength: 24,
-        }
+        },
     },
 };
 export const getSchema = {
     type: "object",
-    additionalProperties: true,
+    additionalProperties: false,
 };
 export const getAllSchema = {
     type: "object",
-    additionalProperties: true,
+    additionalProperties: false,
 };
 
 export const deleteSchema = {
     type: "object",
-    additionalProperties: true,
+    additionalProperties: false,
 };

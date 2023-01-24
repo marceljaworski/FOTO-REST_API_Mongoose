@@ -3,14 +3,14 @@ export const postSchema = {
     // required: ["url"],
     additionalProperties: false,
     properties: {
-        title: { type: "string" },
+        name: { type: "string" },
         email: { type: "string", format: "email" },
         address: {
             type: "object",
             additionalProperties: false,
             properties: {
                 street: { type: "string" },
-                houseNummer: { type: "string" },
+                houseNumber: { type: "string" },
                 zipCode: { type: "string" },
                 city: { type: "string" },
                 country: { type: "string" },
@@ -20,14 +20,14 @@ export const postSchema = {
 };
 export const getSchema = {
     type: "object",
-    additionalProperties: true,
+    additionalProperties: false,
 };
 export const getAllSchema = {
     type: "object",
-    additionalProperties: true,
+    additionalProperties: false,
 };
 
 export const deleteSchema = {
     type: "object",
-    additionalProperties: true,
+    additionalProperties: false,
 };

@@ -31,7 +31,7 @@ const settingSchema = new mongoose.Schema({
     whiteBalance: {
         type: Number,
         default: 5200,
-        min: 2500,
+        min: 1500,
         max: 10000    
     },
 },{_id: false, versionKey: false});
