@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const schema = new mongoose.Schema({
     title: {
         type: String,
-        // required: true
+        required: true
     },
     
 },{versionKey: false});

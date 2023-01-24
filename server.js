@@ -22,8 +22,8 @@ app.use("/photos",  photoRoutes);
 app.use("/albums",  albumRoutes);
 app.use("/photographer",  photographerRoutes);
 
-app.use((err, req, res, next) => {
-    console.log(err);
-    const statusCode = err.statusCode || 500;
-    res.status(statusCode).send(err.message);
+app.use((error, req, res, next) => {
+    console.log(error);
+    const statusCode = error.statusCode || 500;
+    res.status(statusCode).send(error.message);
 });

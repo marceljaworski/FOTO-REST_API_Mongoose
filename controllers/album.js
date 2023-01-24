@@ -1,17 +1,17 @@
 import * as Album from "../models/Album.js";
 
 
-const errorSwitch = (err) => {
-    switch(err.path) {
+const errorSwitch = (error) => {
+    switch(error.path) {
         case "_id":
-            err.statusCode = 404;
-            err.message = "ID not found"
+            error.statusCode = 404;
+            error.message = "ID not found"
             break
         default:
-            err.statusCode = 400;
-            err.message = "Check your input";
+            error.statusCode = 400;
+            error.message = "Check your input";
     }
-    return err;
+    return error;
 }
 
 
@@ -19,8 +19,8 @@ export const getAll = async (req, res, next) => {
     try {
         const result = await Album.getAll();
         res.status(200).json(result);
-    } catch (err) {
-        next(errorSwitch(err));
+    } catch (error) {
+        next(errorSwitch(error));
     };
 };
 
@@ -28,8 +28,8 @@ export const create = async (req, res, next) => {
     try {
         const result = await Album.create(req.body);
         res.status(201).json(result);
-    } catch(err) {
-        next(errorSwitch(err));
+    } catch(error) {
+        next(errorSwitch(error));
         // res.status(400).json(error.message)
     }
   
@@ -38,16 +38,16 @@ export const getOne = async (req, res, next) => {
     try {
         const result = await Album.getOne(req.params.albumId);
         res.status(200).json(result);
-    } catch(err) {
-        next(errorSwitch(err));
+    } catch(error) {
+        next(errorSwitch(error));
     };
 }
 export const replace = async (req, res, next) => {
     try {
         const result = await Album.replace(req.params.albumId, req.body)
         res.status(201).json(result)
-    }catch(err) {
-        next(errorSwitch(err));
+    }catch(error) {
+        next(errorSwitch(error));
     };
 };
 export const update = async (req, res) => {
@@ -58,16 +58,16 @@ export const update = async (req, res) => {
     try {
         const result = await Album.update(req.params.albumId, req.body);
         res.status(201).json(result);
-    }catch(err) {
-        next(errorSwitch(err));
+    }catch(error) {
+        next(errorSwitch(error));
     }; 
 };
 export const deleteOne = async (req, res, next) => {
     try{
         await Album.deleteOne(req.params.albumId)
         res.status(204).send()
-    }catch(err) {
-        next(errorSwitch(err));
+    }catch(error) {
+        next(errorSwitch(error));
     };
     console.log(result)
 }

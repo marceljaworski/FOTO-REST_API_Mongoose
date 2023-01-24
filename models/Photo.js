@@ -52,7 +52,7 @@ const schemaPhoto = new mongoose.Schema({
             message: "Please write a valid URL"
         },
         // unique: true,
-        // required: true,
+        required: true,
     },
     theme: {
         type: String, 

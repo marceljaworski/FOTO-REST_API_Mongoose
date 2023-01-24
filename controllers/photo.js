@@ -1,35 +1,37 @@
 import * as Photo from "../models/Photo.js";
 
 
-// const errorSwitch = (err) => {
-//     switch(err.path) {
-//         case "_id":
-//             err.statusCode = 404;
-//             err.message = "ID not found"
-//             break
-//         default:
-//             err.statusCode = 400;
-//             err.message = "Check your input";
-//     }
-//     return err;
-// }
+const errorSwitch = (error) => {
+    switch(error.path) {
+        case "_id":
+            error.statusCode = 404;
+            error.message = "ID not found"
+            break
+        default:
+            error.statusCode = 400;
+            error.message = "Check your input";
+    }
+    return error;
+}
 
 
-export const getAll = async (req, res) => {
+export const getAll = async (req, res, next) => {
     try {
         const result = await Photo.getAll();
         res.status(200).json(result);
     } catch (error) {
-        res.status(400).json(error.message);
+        next(errorSwitch(error));
+        // res.status(400).json(error.message);
     };
 };
 
-export const create = async (req, res ) => {
+export const create = async (req, res, next ) => {
     try {
         const result = await Photo.create(req.body);
         res.status(201).json(result);
     } catch(error) {
-        res.status(400).json(error.message);
+        next(errorSwitch(error));
+        // res.status(400).json(error.message);
     }
   
 };
@@ -37,16 +39,16 @@ export const getOne = async (req, res, next) => {
     try {
         const result = await Photo.getOne(req.params.photoId);
         res.status(200).json(result);
-    } catch(err) {
-        next(errorSwitch(err));
+    } catch(error) {
+        next(errorSwitch(error));
     };
 }
 export const replace = async (req, res, next) => {
     try {
         const result = await Photo.replace(req.params.photoId, req.body)
         res.status(201).json(result)
-    }catch(err) {
-        next(errorSwitch(err));
+    }catch(error) {
+        next(errorSwitch(error));
     };
 };
 export const update = async (req, res) => {
@@ -57,16 +59,16 @@ export const update = async (req, res) => {
     try {
         const result = await Photo.update(req.params.photoId, req.body);
         res.status(201).json(result);
-    }catch(err) {
-        next(errorSwitch(err));
+    }catch(error) {
+        next(errorSwitch(error));
     }; 
 };
 export const deleteOne = async (req, res, next) => {
     try{
         await Photo.deleteOne(req.params.photoId)
-        res.status(204).send()
-    }catch(err) {
-        next(errorSwitch(err));
+        res.status(204).end()
+    }catch(error) {
+        next(errorSwitch(error));
     };
     console.log(result)
 }
