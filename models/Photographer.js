@@ -12,23 +12,26 @@ const photographerSchema = mongoose.Schema({
             message: "Please enter a valid email address"
         }
     },
-    // password: String,
-    address:{
-        street: String,
-        houseNumber: {
-            type: String,
-            validate: {
-                validator: (v) => /^[0-9].*$/.test(v),
-                message: "Please insert some kind of number as House number"
-            }
-        },
-        zipCode: String,
-        city: String,
-        country: String,
-            
+    password: {
+        type: String,
+        required: true,
     },
+    // address:{
+    //     street: String,
+    //     houseNumber: {
+    //         type: String,
+    //         validate: {
+    //             validator: (v) => /^[0-9].*$/.test(v),
+    //             message: "Please insert some kind of number as House number"
+    //         }
+    //     },
+    //     zipCode: String,
+    //     city: String,
+    //     country: String,
+            
+    // },
     
-},{versionKey: false})
+},{ timestamps: true },{ versionKey: false });
 const Photographer = mongoose.model("Photographer", photographerSchema);
 
 export const getAll = async () => {
@@ -36,13 +39,15 @@ export const getAll = async () => {
     return photographers;
 };
 export const create = async (document) => {    
-    const newPhotographer = new Photographer(document);
-    const result = await newPhotographer.save();
+    const newUser = new Photographer(document);
+    const result = await newUser.save()
     return result;
+   
+    }
     
 };
-export const getOne = async (photographerId) => {
-    const photographer = await Photographer.findById(photographerId);
+export const getOne = async (filter) => {
+    const photographer = await Photographer.findOne(filter);
     return photographer;
 };
 export const replace = async (photographerId, data) => {
