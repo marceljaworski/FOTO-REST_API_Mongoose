@@ -43,8 +43,6 @@ export const create = async (document) => {
     const result = await newUser.save()
     return result;
    
-    }
-    
 };
 export const getOne = async (filter) => {
     const photographer = await Photographer.findOne(filter);
