@@ -49,8 +49,8 @@ export const update = async (req, res, next) => {
 };
 export const deleteOne = async (req, res, next) => {
     try{
-        await Album.deleteOne(req.params.albumId)
-        res.status(204).send();
+        const result = await Album.deleteOne(req.params.albumId);
+        if(result.deletedCount > 0) return res.status(204).send();
     }catch(error) {
         next(error);
     };

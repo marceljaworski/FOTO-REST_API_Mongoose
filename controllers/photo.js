@@ -50,8 +50,8 @@ export const update = async (req, res, next) => {
 };
 export const deleteOne = async (req, res, next) => {
     try{
-        await Photo.deleteOne(req.params.photoId)
-        res.status(204).end()
+        const result = await Photo.deleteOne(req.params.photoId);
+        if(result.deletedCount > 0) return res.status(204).end();
     }catch(error) {
         next(error);
     };

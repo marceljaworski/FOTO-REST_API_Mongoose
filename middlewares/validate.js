@@ -1,7 +1,7 @@
 /*Bei der Verwendung von ajv validieren wir die Daten in dem Moment, in dem sie empfangen werden*/ 
 import Ajv from "ajv";
 
-const ajv = new Ajv({ allErrors: true });//wir deklarieren eine neue Instanz von Ajv
+const ajv = new Ajv({ allErrors: true, allowUnionTypes: true });//wir deklarieren eine neue Instanz von Ajv
 
 // Wir können verschiedene Formate über ein Zusatzmodul prüfen.
 // So ist es bspw. möglich, eine E-Mail-Adresse oder URL zu validieren.
@@ -13,13 +13,13 @@ const validate = (schema) => {
     const test = ajv.compile(schema);
     /**Schließlich verwenden wir eine Middleware, um die erhaltenen Informationen zu validieren */
     return (req, res, next) => {
-
         const valid = test(req.body);
+        //console.log(valid)
         //Wenn es nicht validiert wird, antworten wir mit Status 400 und senden den Fehler
         if (!valid) return res.status(400).json(test.errors);
         //Wenn validiert, ermöglicht next die Ausführung der folgenden Aktionen
         next();
     };
-}
+};
 
 export default validate;
