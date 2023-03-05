@@ -22,10 +22,10 @@ const server = express();
 const port = process.env.PORT || 3000;
 server.use(express.json());
 server.use(
-    cors({
+    cors(/**{
       credentials: true,
-      origin: "http://localhost:5174",
-    })
+      origin: "http://localhost:5173",
+    }*/)
 );
   
 
@@ -60,7 +60,7 @@ server.get("/*", (req, res) => res.sendFile(__dirname + "/dist/index.html"));
 // })
 
 server.use((error, req, res, next) => {
-    console.error("ohhh!!", error);
+    console.error("ohhh an error!!", error);
     res.status(500).end();
 });
 
