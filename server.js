@@ -8,6 +8,7 @@ import "./lib/mongoose.js";
 
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -21,11 +22,12 @@ import photographerRouter from "./routes/photographer.js"
 const server = express();
 const port = process.env.PORT || 3000;
 server.use(express.json());
+server.use(cookieParser());
 server.use(
-    cors(/**{
+    cors({
       credentials: true,
       origin: "http://localhost:5173",
-    }*/)
+    })
 );
   
 
