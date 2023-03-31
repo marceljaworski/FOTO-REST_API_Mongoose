@@ -7,6 +7,7 @@ const photographerRoutes = Router();
 
 photographerRoutes.post("/", validate(postSchema), photographer.create);
 photographerRoutes.post("/login", photographer.login);
+photographerRoutes.get("/logout", photographer.logout);
 photographerRoutes.get("/", validate(getAllSchema), photographer.getAll);
 photographerRoutes.get("/:photographerId", validate(getSchema), photographer.getOne);
 photographerRoutes.put("/:photographerId", photographer.replace);

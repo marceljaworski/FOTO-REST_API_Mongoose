@@ -50,6 +50,17 @@ export const login = async (req, res, next) => {
     };
   
 };
+export const logout = async(req, res, next) => {
+    res.clearCookie("loggedIn")
+    res.clearCookie("jwt")
+    req.logOut(function(err) {
+        if (err) { 
+            return next(err)
+        }
+        res.status(200).send()
+    })
+}
+
 export const getOne = async (req, res, next) => {
     try {
         const result = await Photographer.getOne(req.params.photographerId);
