@@ -9,6 +9,7 @@ import "./lib/mongoose.js";
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import fileUpload from "express-fileupload";
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -16,8 +17,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 import photoRouter from "./routes/photo.js";
-import albumRouter from "./routes/album.js"
-import photographerRouter from "./routes/photographer.js"
+import albumRouter from "./routes/album.js";
+import photographerRouter from "./routes/photographer.js";
+import uploadRouter from "./routes/upload.js";
 
 const server = express();
 const port = process.env.PORT || 3000;
@@ -38,6 +40,7 @@ server.use(logMiddleware);
 server.use("/api/photos",  photoRouter);
 server.use("/api/albums",  albumRouter);
 server.use("/api/photographer",  photographerRouter);
+server.use("api/upload", uploadRouter);
 
 // With res.sendFile we can deliver files. To do this, we set up an endpoint with a method and path as usual.
 // res.sendFile is then given an absolute path (we need __dirname for this) that points to the file.
