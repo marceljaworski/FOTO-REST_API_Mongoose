@@ -12,4 +12,4 @@ photoRoutes.get("/", image.getAll);
 // photoRoutes.patch("/:photoId", photos.update);
 // photoRoutes.delete("/:photoId", validate(deleteSchema), photos.deleteOne);
 
-export default uploadRouter;
+export default photoRoutes;
